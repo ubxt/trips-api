@@ -10,10 +10,18 @@ class PassengerView(APIView):
 
     def get(self, request, format=None):
         passengers = Passenger.objects.all()
-        serializedPassengers = PassengerSerializer(passengers, many=True)
-        returnObj = PassengerResponse(
-            passengers=serializedPassengers.data, result=ResultTypes.RETRIEVED)
-        return Response(data=returnObj.to_json(), status=status.HTTP_200_OK)
+        if passengers:
+            serializedPassengers = PassengerSerializer(passengers, many=True)
+            returnObj = PassengerResponse(
+                passengers=serializedPassengers.data,
+                result=ResultTypes.RETRIEVED)
+            return Response(data=returnObj.to_json(),
+                            status=status.HTTP_200_OK)
+        else:
+            returnObj = PassengerResponse(
+                passengers=None, result=ResultTypes.NOT_FOUND)
+            return Response(data=returnObj.to_json(),
+                            status=status.HTTP_404_NOT_FOUND)
 
     def post(self, request, format=None):
         serializer = PassengerSerializer(data=request.data)

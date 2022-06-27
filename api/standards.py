@@ -4,6 +4,8 @@ class ResultTypes:
     NOT_FOUND = "Not Found"
     RETRIEVED = "retrieved"
     ERROR = "Error"
+    UPDATED = "Updated"
+    DELETED = "Deleted"
 
 
 class PassengerResponse:
