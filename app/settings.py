@@ -130,10 +130,14 @@ REST_FRAMEWORK = {
     "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.NamespaceVersioning",
 }
 
+
 # CELERY
-BROKER_URL = "redis://localhost:6379"
-CELERY_RESULT_BACKEND = "redis://localhost:6379"
+USE_DOCKER = True
+if USE_DOCKER:
+    BROKER_URL = "redis://redis:6379"  # Docker
+else:
+    BROKER_URL = "redis://localhost:6379"  # Local
+
 CELERY_ACCEPT_CONTENT = ["application/json"]
 CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
-CELERY_TIMEZONE = "Africa/Nairobi"
