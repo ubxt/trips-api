@@ -1,17 +1,24 @@
+from distutils.util import strtobool
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from ..standards import PassengerResponse, ResultTypes
 from base.models import Passenger
-from ..serializers import PassengerSerializer
+from ..serializers import PassengerSerializer, PassengerSerializerWithTrips
 
 
 class PassengerView(APIView):
 
     def get(self, request, format=None):
         passengers = Passenger.objects.all()
+        isDetailed = request.query_params.get('detailed')
         if passengers:
-            serializedPassengers = PassengerSerializer(passengers, many=True)
+            serializedPassengers = (PassengerSerializerWithTrips(passengers,
+                                                                 many=True)
+                                    if (isDetailed and
+                                        bool(strtobool(isDetailed)))
+                                    else PassengerSerializer(passengers,
+                                                             many=True))
             returnObj = PassengerResponse(
                 passengers=serializedPassengers.data,
                 result=ResultTypes.RETRIEVED)

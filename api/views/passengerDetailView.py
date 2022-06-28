@@ -1,9 +1,10 @@
+from distutils.util import strtobool
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from ..standards import PassengerResponse, ResultTypes
 from base.models import Passenger
-from ..serializers import PassengerSerializer
+from ..serializers import PassengerSerializer, PassengerSerializerWithTrips
 
 
 class PassengerDetailView(APIView):
@@ -19,8 +20,12 @@ class PassengerDetailView(APIView):
 
     def get(self, request, id, format=None):
         passenger = self.get_passenger(id)
+        isDetailed = request.query_params.get('detailed')
         if passenger:
-            serializedPassenger = PassengerSerializer(passenger)
+            serializedPassenger = (PassengerSerializerWithTrips(passenger)
+                                   if (isDetailed and
+                                       bool(strtobool(isDetailed)))
+                                   else PassengerSerializer(passenger))
             returnObj = PassengerResponse(
                 serializedPassenger.data, ResultTypes.RETRIEVED)
             return Response(data=returnObj.to_json(),
