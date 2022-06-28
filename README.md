@@ -1,8 +1,4 @@
 
-<img src="https://cdn-icons.flaticon.com/png/512/2915/premium/2915172.png?token=exp=1656457523~hmac=c427a5484facbe6b1d1f35c3d5c1e2e3" width=64 height=64 align=right>
-<br>
-<br>
-
 # Trips API
 
 A web API to make CRUD operations for a system that handles trips and passengers.
