@@ -45,11 +45,11 @@ A web API to make CRUD operations for a system that handles trips and passengers
 <br>
 
 > ### Trip
-> - _GET_ /api/passenger : Returns all trips <strong>*</strong>
-> - _POST_ /api/passenger : Creates new trip. Expects trip object as json from request body.
-> - _GET_ /api/passenger/< id > : Returns single passenger with the specified id <strong>*</strong>
-> - _PUT_ /api/passenger/< id > : Updates the trip with the specified id. Expects trip object from body.
-> - _DELETE_ /api/passenger/< id > : Deletes the trip with the specified id.
+> - _GET_ /api/trip : Returns all trips <strong>*</strong>
+> - _POST_ /api/trip : Creates new trip. Expects trip object as json from request body.
+> - _GET_ /api/trip/< id > : Returns single passenger with the specified id <strong>*</strong>
+> - _PUT_ /api/trip/< id > : Updates the trip with the specified id. Expects trip object from body.
+> - _DELETE_ /api/trip/< id > : Deletes the trip with the specified id.
 > <br>
 <br>
 
